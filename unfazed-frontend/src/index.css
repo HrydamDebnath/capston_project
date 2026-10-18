@@ -1,0 +1,98 @@
+@import "tailwindcss";
+@import "react-big-calendar/lib/css/react-big-calendar.css";
+
+@theme {
+  --font-sans: "Manrope", system-ui, sans-serif;
+  --font-display: "Bricolage Grotesque", "Manrope", sans-serif;
+  --color-ink: #1b2236;
+  --color-muted: #5b6477;
+  --color-mist: #f3f5f9;
+  --color-line: #e3e7ef;
+  --color-brand: #3d4fd9;
+  --color-brand-dark: #2e3db3;
+  --color-brand-soft: #e9ecff;
+  --color-calm: #1f9d82;
+  --color-calm-soft: #e0f4ee;
+  --color-warn: #b96f0e;
+  --color-warn-soft: #fcefd8;
+  --color-danger: #c93a54;
+  --color-danger-soft: #fce6ea;
+  --color-night: #12172b;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    color: var(--color-ink);
+    background: var(--color-mist);
+    -webkit-font-smoothing: antialiased;
+  }
+  body { margin: 0; min-height: 100vh; }
+  h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.02em; line-height: 1.15; }
+  button { cursor: pointer; }
+  :focus-visible { outline: 2px solid var(--color-brand); outline-offset: 2px; }
+  ::selection { background: var(--color-brand-soft); }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  }
+}
+
+@layer components {
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+    border-radius: 0.75rem; padding: 0.625rem 1.1rem; font-size: 0.875rem; font-weight: 600;
+    border: 1px solid transparent; transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+    white-space: nowrap;
+  }
+  .btn:disabled { opacity: 0.55; cursor: not-allowed; }
+  .btn-primary { background: var(--color-brand); color: #fff; }
+  .btn-primary:hover:not(:disabled) { background: var(--color-brand-dark); }
+  .btn-soft { background: var(--color-brand-soft); color: var(--color-brand-dark); }
+  .btn-soft:hover:not(:disabled) { background: #dce1ff; }
+  .btn-outline { background: #fff; border-color: var(--color-line); color: var(--color-ink); }
+  .btn-outline:hover:not(:disabled) { border-color: #c5ccdc; background: #fafbfd; }
+  .btn-danger { background: var(--color-danger-soft); color: var(--color-danger); }
+  .btn-danger:hover:not(:disabled) { background: #f9d3da; }
+  .btn-sm { padding: 0.4rem 0.8rem; font-size: 0.8125rem; border-radius: 0.625rem; }
+  .btn-lg { padding: 0.85rem 1.5rem; font-size: 1rem; border-radius: 0.9rem; }
+
+  .card { background: #fff; border: 1px solid var(--color-line); border-radius: 1.25rem; }
+  .panel-title { font-size: 1.05rem; font-weight: 700; }
+
+  .input {
+    width: 100%; border: 1px solid var(--color-line); background: #fff; border-radius: 0.75rem;
+    padding: 0.65rem 0.85rem; font-size: 0.9rem; color: var(--color-ink); transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .input::placeholder { color: #9aa3b5; }
+  .input:hover { border-color: #c5ccdc; }
+  .input:focus { outline: none; border-color: var(--color-brand); box-shadow: 0 0 0 3px var(--color-brand-soft); }
+  .input[aria-invalid="true"] { border-color: var(--color-danger); }
+  textarea.input { resize: vertical; min-height: 6rem; line-height: 1.5; }
+
+  .badge { display: inline-flex; align-items: center; gap: 0.35rem; border-radius: 999px; padding: 0.2rem 0.65rem; font-size: 0.75rem; font-weight: 600; }
+  .badge-brand { background: var(--color-brand-soft); color: var(--color-brand-dark); }
+  .badge-calm { background: var(--color-calm-soft); color: #137a63; }
+  .badge-warn { background: var(--color-warn-soft); color: var(--color-warn); }
+  .badge-danger { background: var(--color-danger-soft); color: var(--color-danger); }
+  .badge-neutral { background: var(--color-mist); color: var(--color-muted); }
+
+  .prose-note { font-size: 0.95rem; line-height: 1.65; }
+  .prose-note p { margin: 0 0 0.6rem; }
+  .prose-note ul { list-style: disc; padding-left: 1.25rem; margin: 0 0 0.6rem; }
+  .prose-note ol { list-style: decimal; padding-left: 1.25rem; margin: 0 0 0.6rem; }
+  .prose-note h2, .prose-note h3 { font-weight: 700; margin: 0.8rem 0 0.4rem; }
+  .prose-note blockquote { border-left: 3px solid var(--color-line); padding-left: 0.9rem; color: var(--color-muted); margin: 0 0 0.6rem; }
+  .ProseMirror { outline: none; min-height: 12rem; }
+  .ProseMirror p.is-editor-empty:first-child::before { content: attr(data-placeholder); color: #9aa3b5; float: left; height: 0; pointer-events: none; }
+
+  .rbc-calendar { font-family: var(--font-sans); font-size: 0.85rem; }
+  .rbc-toolbar button { font-family: var(--font-sans); border-color: var(--color-line); border-radius: 0.6rem; color: var(--color-ink); font-weight: 600; }
+  .rbc-toolbar button.rbc-active { background: var(--color-brand-soft); border-color: var(--color-brand-soft); color: var(--color-brand-dark); box-shadow: none; }
+  .rbc-toolbar button:hover { background: var(--color-mist); }
+  .rbc-toolbar-label { font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; }
+  .rbc-today { background: #f5f7ff; }
+  .rbc-time-view, .rbc-month-view, .rbc-header, .rbc-day-bg, .rbc-time-content, .rbc-timeslot-group { border-color: var(--color-line); }
+  .rbc-event { border-radius: 0.5rem; padding: 2px 6px; font-weight: 600; border: none; }
+  .rbc-event:focus { outline: 2px solid var(--color-brand); }
+  .rbc-current-time-indicator { background: var(--color-danger); }
+}
